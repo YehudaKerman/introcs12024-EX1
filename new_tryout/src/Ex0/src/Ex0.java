@@ -73,7 +73,7 @@ package Ex0.src; /**
 
  */
 import java.util.Scanner;
-public class Main {
+public class Ex0 {
     /**
      * The main function receives an even number bigger than 4 from the user, and then calls multiple functions that
      * its prime components. I.e., which prime numbers it's a sum of, which two prime number it is the difference of,
@@ -85,6 +85,11 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter an even number bigger then 4: ");//even number>4
         int n = scan.nextInt();
+        if (n<=5 || n%2!=0)
+        {
+            System.out.println("Error");
+            System.exit (1);
+        }
         long strTime = System.currentTimeMillis();              //check the time for running time
         addPrime(n);                                            //check sum of what prime number =n and print them
         subtractPrime(n);                                      //check which prime number + n = prime number and print them
