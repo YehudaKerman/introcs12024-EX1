@@ -1,4 +1,4 @@
-package assignments.ex1;
+package Ex1;
 /**
  * This class represents a simple solution for Ex1.
  * As defined here: https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit
@@ -33,7 +33,25 @@ public class Ex1 {
         public static boolean isNumber(String a) {
             boolean ans = true;
             // add your code here
+            if (a.length()<3){
+                ans = false;
+            }
+            else {
 
+                if (a.charAt(-2) != 'b') {
+                    ans = false;
+                } else {
+                    if (((int) (a.charAt(-1)) < 48) || ((int) (a.charAt(-1)) > 71) || ((int) (a.charAt(0)) > 57) && ((int) (a.charAt(0)) < 65)) {
+                        ans = false;
+                    } else {
+                        for (int i = 0; i < a.length() - 2; i++) {
+                            if (((int) a.charAt(i)) >= ((int) a.charAt(-1)) || ((int) a.charAt(i)) < 48) {
+                                ans = false;
+                            }
+                        }
+                    }
+                }
+            }
             ////////////////////
             return ans;
         }
