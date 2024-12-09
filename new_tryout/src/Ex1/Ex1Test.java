@@ -43,7 +43,9 @@ public class Ex1Test {
         }
         @Test
         void maxIndexTest() {
-            // implement this test
+           String [] numArr  = {"100","134b8","GbG","1100100b2","2Fbg",null,"17FbG"};
+           int max = Ex1.maxIndex(numArr);
+           assertEquals(6,max);
         }
 
         @Test
@@ -51,5 +53,20 @@ public class Ex1Test {
           String s2 = "AF34BDbG";
           int res = Ex1.number2Int(s2);
           assertTrue(res == 11482301);
+        }
+        @Test
+        void numAddTest() {
+                String a = "57b8";
+                String b = "35bG";
+                int base = 2;
+                String result = Ex1.numAdd(a,b,base);
+                assertEquals("1100100b2",result);
+            }
+    void multNumTest() {
+        String a = "57b8";
+        String b = "35bG";
+        int base = 2;
+        String result = Ex1.numAdd(a,b,base);
+        assertEquals("1100100b2",result);
         }
     }

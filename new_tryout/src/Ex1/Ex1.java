@@ -165,12 +165,21 @@ public class Ex1 {
          */
         public static boolean equals(String n1, String n2) {
             boolean ans = true;
-            // add your code here
-
-            ////////////////////
+            int a = number2Int(n1);
+            int b = number2Int(n2);
+            if (a != b)
+            {
+                ans = false;
+            }
             return ans;
         }
-        public static char intToBase (int n) {
+
+    /**
+     *
+     * @param n
+     * @return
+     */
+    public static char intToBase (int n) {
             char ans = 0;
             if (n>17 || n<0)
             {
@@ -192,9 +201,53 @@ public class Ex1 {
          */
         public static int maxIndex(String[] arr) {
             int ans = 0;
-            // add your code here
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] == null)
+                {
+                    ans = ans;
+                }
+                else{
+                    int a = number2Int(arr[ans]);
+                    int b = number2Int(arr[i]);
+                    if (b>a)
+                    {
+                        ans = i;
+                    }
+                }
 
-            ////////////////////
+            }
             return ans;
         }
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @param base
+     * @return
+     */
+        public static String numAdd(String a, String b, int base)
+        {
+            int first = number2Int(a);
+            int second = number2Int(b);
+            int sum = first + second;
+            String ans = int2Number(sum, base);
+            return ans;
+        }
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @param base
+     * @return
+     */
+    public static String multNUm(String a, String b, int base)
+    {
+        int first = number2Int(a);
+        int second = number2Int(b);
+        int sum = first * second;
+        String ans = int2Number(sum, base);
+        return ans;
+    }
 }
