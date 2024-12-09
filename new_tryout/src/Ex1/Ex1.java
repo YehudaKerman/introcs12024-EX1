@@ -21,7 +21,27 @@ public class Ex1 {
         public static int number2Int(String num) {
             int ans = -1;
             // add your code here
-
+            if (!(isNumber(num)))
+            {
+                ans = -1;
+            }
+            else
+            {
+                if (isBase10(num))
+                {
+                  ans = Integer.parseInt(num);
+                }
+                else
+                {
+                    ans = 0;
+                    int base = whatBase(num);
+                    for (int i = num.length()-3; i >= 0; i--)
+                    {
+                        int digit = whatBase(num.charAt(i));
+                       ans = ans + (digit * (int) (Math.pow(base,(num.length()-i-3))));//
+                    }
+                }
+            }
             ////////////////////
             return ans;
         }
@@ -33,19 +53,25 @@ public class Ex1 {
         public static boolean isNumber(String a) {
             boolean ans = true;
             // add your code here
-            if (a.length()<3){
-                ans = false;
+            if (isBase10(a))
+            {
+                ans = true;
             }
             else {
-
-                if (a.charAt(-2) != 'b') {
+                if (a.length()<3 || a.charAt(a.length()-2) != 'b')
+                {
                     ans = false;
                 } else {
-                    if (((int) (a.charAt(-1)) < 48) || ((int) (a.charAt(-1)) > 71) || ((int) (a.charAt(0)) > 57) && ((int) (a.charAt(0)) < 65)) {
+                    if ((whatBase(a) ==-1))
+                    {
                         ans = false;
-                    } else {
-                        for (int i = 0; i < a.length() - 2; i++) {
-                            if (((int) a.charAt(i)) >= ((int) a.charAt(-1)) || ((int) a.charAt(i)) < 48) {
+                    }
+                    else
+                    {
+                        for (int i = 0; i < a.length() - 2 && ans == true; i++)
+                        {
+                            if (((whatBase(a.charAt(i))) >= whatBase(a)) || ((whatBase(a.charAt(i))==-1)))
+                            {
                                 ans = false;
                             }
                         }
@@ -55,8 +81,56 @@ public class Ex1 {
             ////////////////////
             return ans;
         }
+        /**
+        /////////
+         */
+        public static boolean isBase10(String a) //need to make a test
+        {
+            boolean ans = true;
+            for (int i = 0; i < a.length() && ans == true; i++)
+            {
+                char c = a.charAt(i);
+                if ((int) c <48 || ((int) c) > 57)
+                {
+                    ans = false;
+                }
+
+            }
+            return ans;
+        }
+        /**
+         * //////
+         */
+        public static int whatBase (char a)
+        {
+            char [] baseArr = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+            int ans = -1;
+            for (int i = 0; i < 17 && ans == -1; i++)
+            {
+                if (a == baseArr[i])
+                {
+                    ans = i;
+                }
+            }
+            return ans;
+        }
 
         /**
+         *
+         * @param a
+         * @return
+         */
+        public static int whatBase (String a)
+        {
+            int ans = -1;
+            if (isBase10(a))
+            {
+                ans = 10;
+            }
+            ans = whatBase(a.charAt(a.length()-1));
+            return ans;
+        }
+    /**
          * Calculate the number representation (in basis base)
          * of the given natural number (represented as an integer).
          * If num<0 or base is not in [2,16] the function should return "" (the empty String).
@@ -66,8 +140,19 @@ public class Ex1 {
          */
         public static String int2Number(int num, int base) {
             String ans = "";
-            // add your code here
-
+            if (num <0 || base < 0 || base > 16)
+            {
+                ans = "";
+            }
+            else {
+                char cbase = intToBase(base);
+                ans = "b"+cbase;
+                for (int i = num; i > 0; i=i/base)
+                {
+                    int lastDigit = i%base;
+                    ans = lastDigit + ans;
+                }
+            }
             ////////////////////
             return ans;
         }
@@ -85,7 +170,18 @@ public class Ex1 {
             ////////////////////
             return ans;
         }
-
+        public static char intToBase (int n) {
+            char ans = 0;
+            if (n>17 || n<0)
+            {
+               ans = '!';
+            }
+            else {
+                char[] baseArr = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+                ans = baseArr[n];
+            }
+            return ans;
+        }
         /**
          * This static function search for the array index with the largest number (in value).
          * In case there are more than one maximum - returns the first index.
