@@ -36,10 +36,16 @@ public class Ex1Test {
         }
         @Test
         void int2NumberTest() {
-            int base = 8;
-            int num = 92;
-            String result = Ex1.int2Number(num,base);
-            assertEquals("134b8",result);
+            int [] numArr = {1,26,-5,100,53,9,12};
+            int [] baseArr= {10,5,9,8,11,16,2,20};
+            boolean ok = true;
+            String [] resArr = {"1bA","101b5","144b8","","49bB","1001b2",""};
+            for(int i=0;i<baseArr.length-1&&ok;i=i+1) {
+                String result = Ex1.int2Number(numArr[i],baseArr[i]);
+                ok = Ex1.equals(resArr[i],result);
+            }
+            assertTrue(ok);
+
         }
         @Test
         void maxIndexTest() {

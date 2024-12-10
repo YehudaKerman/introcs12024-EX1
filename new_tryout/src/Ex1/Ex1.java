@@ -52,34 +52,38 @@ public class Ex1 {
          */
         public static boolean isNumber(String a) {
             boolean ans = true;
-            // add your code here
-            if (isBase10(a))
+            if (a.equals(""))
             {
-                ans = true;
+                ans = false;
             }
-            else {
-                if (a.length()<3 || a.charAt(a.length()-2) != 'b')
+            else
+                if (isBase10(a))
                 {
-                    ans = false;
-                } else {
-                    if ((whatBase(a) ==-1))
+                    ans = true;
+                }
+                else {
+                    if (a.length()<3 || a.charAt(a.length()-2) != 'b')
                     {
                         ans = false;
-                    }
-                    else
-                    {
-                        for (int i = 0; i < a.length() - 2 && ans == true; i++)
+                    } else {
+                        if ((whatBase(a) ==-1))
                         {
-                            if (((whatBase(a.charAt(i))) >= whatBase(a)) || ((whatBase(a.charAt(i))==-1)))
+                            ans = false;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < a.length() - 2 && ans == true; i++)
                             {
-                                ans = false;
+                                if (((whatBase(a.charAt(i))) >= whatBase(a)) || ((whatBase(a.charAt(i))==-1)))
+                                {
+                                    ans = false;
+                                }
                             }
                         }
                     }
                 }
-            }
-            ////////////////////
-            return ans;
+                ////////////////////
+                return ans;
         }
         /**
         /////////
