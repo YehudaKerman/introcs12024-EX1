@@ -154,7 +154,8 @@ public class Ex1 {
                 for (int i = num; i > 0; i=i/base)
                 {
                     int lastDigit = i%base;
-                    ans = lastDigit + ans;
+                    char lastChar = intToBase(lastDigit);
+                    ans = lastChar + ans;
                 }
             }
             ////////////////////
@@ -203,7 +204,7 @@ public class Ex1 {
          * @return the index in the array in with the largest number (in value).
          *
          */
-        public static int maxIndex(String[] arr) {
+    public static int maxIndex(String[] arr) {
             int ans = 0;
             for (int i = 0; i < arr.length; i++) {
                 if (arr[i] == null)
