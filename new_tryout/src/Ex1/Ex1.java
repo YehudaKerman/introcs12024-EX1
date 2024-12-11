@@ -21,38 +21,39 @@ public class Ex1 {
         public static int number2Int(String num) {
             int ans = -1;
             // add your code here
-            if (!(isNumber(num)))
+            if (!(isNumber(num))) //check if the number valid
             {
                 ans = -1;
             }
             else
             {
-                if (isBase10(num))
+                if (isBase10(num)) //check for base 10 and convert to int if so
                 {
                   ans = Integer.parseInt(num);
                 }
                 else
                 {
                     ans = 0;
-                    int base = whatBase(num);
-                    for (int i = num.length()-3; i >= 0; i--)
+                    int base = converteChar2BaseOrInt(num); // check in what base the number is
+                    for (int i = num.length()-3; i >= 0; i--) // loop to convert each cahr to int
                     {
-                        int digit = whatBase(num.charAt(i));
-                       ans = ans + (digit * (int) (Math.pow(base,(num.length()-i-3))));//
+                        int digit = converteChar2BaseOrInt(num.charAt(i));
+                       ans = ans + (digit * (int) (Math.pow(base,(num.length()-i-3))));//algoritem by wikipedia to find
+                        // base 10 of number by converting each digit and multiply by the base to the power
+                        //the order of the digit the in the given number from right to left
                     }
                 }
             }
-            ////////////////////
             return ans;
         }
         /**
          * This static function checks if the given String (g) is in a valid "number" format.
-         * @param a a String representing a number
+         * @param  a String representing a number
          * @return true iff the given String is in a number format
          */
         public static boolean isNumber(String a) {
             boolean ans = true;
-            if (a.equals(""))
+            if (a.equals("")) // for empty strings
             {
                 ans = false;
             }
@@ -62,11 +63,11 @@ public class Ex1 {
                     ans = true;
                 }
                 else {
-                    if (a.length()<3 || a.charAt(a.length()-2) != 'b')
+                    if (a.length()<3 || a.charAt(a.length()-2) != 'b') // checks for numbers without b
                     {
                         ans = false;
                     } else {
-                        if ((whatBase(a) ==-1))
+                        if ((converteChar2BaseOrInt(a) ==-1)) // bases that not in [2,16]
                         {
                             ans = false;
                         }
@@ -74,7 +75,9 @@ public class Ex1 {
                         {
                             for (int i = 0; i < a.length() - 2 && ans == true; i++)
                             {
-                                if (((whatBase(a.charAt(i))) >= whatBase(a)) || ((whatBase(a.charAt(i))==-1)))
+                                if (((converteChar2BaseOrInt(a.charAt(i))) >= converteChar2BaseOrInt(a)) ||
+                                        ((converteChar2BaseOrInt(a.charAt(i))==-1)))//check if the numbers in the string
+                                    //are bigger than the base or not acceptably char for the program
                                 {
                                     ans = false;
                                 }
@@ -82,11 +85,12 @@ public class Ex1 {
                         }
                     }
                 }
-                ////////////////////
                 return ans;
         }
         /**
-        /////////
+         * This static function checks if the given String (a) is in a valid is in base 10 and not with the format.
+         * @param a a String representing a number
+         * @return true iff the given String is in a base10 without format
          */
         public static boolean isBase10(String a) //need to make a test
         {
@@ -94,7 +98,7 @@ public class Ex1 {
             for (int i = 0; i < a.length() && ans == true; i++)
             {
                 char c = a.charAt(i);
-                if ((int) c <48 || ((int) c) > 57)
+                if ((int) c <48 || ((int) c) > 57) // 0-9
                 {
                     ans = false;
                 }
@@ -103,9 +107,12 @@ public class Ex1 {
             return ans;
         }
         /**
-         * //////
+         * This static function convert the chars in the number to their equivalents numbers in 10 base
+         * to understend the number and the base
+         * @param a is char in the string representing the number
+         * @return int of the number eequivalent to the char
          */
-        public static int whatBase (char a)
+        public static int converteChar2BaseOrInt(char a)
         {
             char [] baseArr = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G'};
             int ans = -1;
@@ -120,18 +127,20 @@ public class Ex1 {
         }
 
         /**
-         *
-         * @param a
-         * @return
+         * This static function convert the last char in the number to his equivalent base in format of 10 base
+         * @param a is the string representing the number
+         * @return int of the number eequivalent to the base return -1 if number is not valid
          */
-        public static int whatBase (String a)
+        public static int converteChar2BaseOrInt(String a)
         {
             int ans = -1;
             if (isBase10(a))
             {
                 ans = 10;
             }
-            ans = whatBase(a.charAt(a.length()-1));
+            else {
+                ans = converteChar2BaseOrInt(a.charAt(a.length()-1));//check the base
+            }
             return ans;
         }
     /**
@@ -149,16 +158,16 @@ public class Ex1 {
                 ans = "";
             }
             else {
-                char cbase = intToBase(base);
+                char cbase = int2Char(base);
                 ans = "b"+cbase;
-                for (int i = num; i > 0; i=i/base)
+                for (int i = num; i > 0; i=i/base)// an algorithm by wikipidia to conert numbers from 10 base to any base
+                    //by finding the remainder of dividing by the desired base and add it from right to left
                 {
                     int lastDigit = i%base;
-                    char lastChar = intToBase(lastDigit);
+                    char lastChar = int2Char(lastDigit);
                     ans = lastChar + ans;
                 }
             }
-            ////////////////////
             return ans;
         }
 
@@ -180,11 +189,11 @@ public class Ex1 {
         }
 
     /**
-     *
-     * @param n
-     * @return
+     * This static function convert int repersent a char in certain bases to creat the number as string
+     * @param n int repersent a char in certain bases
+     * @return a char represnt the number
      */
-    public static char intToBase (int n) {
+    public static char int2Char(int n) {
             char ans = 0;
             if (n>17 || n<0)
             {
@@ -225,11 +234,11 @@ public class Ex1 {
         }
 
     /**
-     *
-     * @param a
-     * @param b
-     * @param base
-     * @return
+     * This static function compute the sum of two numbers and return the sum in required base
+     * @param a is a string represent the first number
+     * @param b is a string represent the second number
+     * @param base is int represent the desired base
+     * @return a string representing the sum in desired base
      */
         public static String numAdd(String a, String b, int base)
         {
@@ -241,11 +250,11 @@ public class Ex1 {
         }
 
     /**
-     *
-     * @param a
-     * @param b
-     * @param base
-     * @return
+     ** This static function compute the multiplier product of two numbers and return the sum in required base
+     * @param a is a string represent the first number
+     * @param b is a string represent the second number
+     * @param base is int represent the desired base
+     * @return a string representing the multiplier product in desired base
      */
     public static String multNUm(String a, String b, int base)
     {

@@ -99,12 +99,12 @@ public class Ex1Test {
         }
     }
     @Test
-    void intToBaseTest(){
+    void int2CharTest(){
         int [] intBaseArr = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,20};
         char [] baseRes = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','!','!'};
         boolean ok = true;
         for (int i = 0; i < intBaseArr.length-1&&ok; i = i + 1) {
-            char res = Ex1.intToBase(intBaseArr[i]);
+            char res = Ex1.int2Char(intBaseArr[i]);
             if (res != baseRes[i]) {
                 ok = false;
             }
@@ -125,12 +125,12 @@ public class Ex1Test {
         }
     }
     @Test
-    void whatBaseCharTest(){
+    void converteChar2BaseOrIntCharTest(){
         int [] intBaseArr = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,-1,-1};
         char [] baseArr = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','&','J'};
         boolean ok = true;
         for (int i = 0; i < intBaseArr.length-1&&ok; i = i + 1) {
-           int res = Ex1.whatBase(baseArr[i]);
+           int res = Ex1.converteChar2BaseOrInt(baseArr[i]);
             if (res != intBaseArr[i]) {
                 ok = false;
             }
@@ -138,12 +138,12 @@ public class Ex1Test {
         assertTrue(ok);
     }
     @Test
-    void whatBaseStrTest(){
+    void converteChar2BaseOrIntStrTest(){
         String[] num = {"57b8", "16ADbG", "12b3", "2AbB","35bG", "3BAbD", "20b4", "34b5","100110010011b2", "50A300bF", "55b7", "3A9bD"};
         int[] base = {8, 16, 3, 11,16,13,4,5,2,15,7,13};
         boolean ok = true;
         for (int i = 0; i < num.length-1&&ok; i = i + 1) {
-            int res = Ex1.whatBase(num[i]);
+            int res = Ex1.converteChar2BaseOrInt(num[i]);
             if (res != base[i]) {
                 ok = false;
             }
