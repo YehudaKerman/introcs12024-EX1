@@ -34,14 +34,21 @@ public class Ex1Main {
                     {
                         System.out.println("Enter a base for output: a number [2,16]");
                         int base = Integer.parseInt(sc.next());
-                        String addRes = Ex1.numAdd(num1, num2, base); //compute the sum of the numbers
-                        String multRes = Ex1.multNUm(num1, num2, base);//compute the multiplier of the numbers
-                        String [] numArr = {num1, num2, addRes, multRes};
-                        int i = Ex1.maxIndex(numArr); //find the max between the numbers
-                        System.out.println(num1 + " + " + num2 + " = " + addRes);
-                        System.out.println(num1 + " * " + num2 + " = " + multRes);
-                        System.out.println("Max number over ["+num1+", "+ num2 + ", " + addRes + ", "
-                                + multRes + "] is: "+ numArr[i]);
+                        if (base>16||base<2){
+                            System.out.println("ERR: base must be between 2 and 16");
+                            continue;
+                        }
+                        else
+                        {
+                            String addRes = Ex1.numAdd(num1, num2, base); //compute the sum of the numbers
+                            String multRes = Ex1.multNUm(num1, num2, base);//compute the multiplier of the numbers
+                            String [] numArr = {num1, num2, addRes, multRes};
+                            int i = Ex1.maxIndex(numArr); //find the max between the numbers
+                            System.out.println(num1 + " + " + num2 + " = " + addRes);
+                            System.out.println(num1 + " * " + num2 + " = " + multRes);
+                            System.out.println("Max number over ["+num1+", "+ num2 + ", " + addRes + ", "
+                                    + multRes + "] is: "+ numArr[i]);
+                        }
                     }
                 }
 
